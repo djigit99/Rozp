@@ -7,8 +7,6 @@ public class MyThread extends Thread {
 	private boolean type;
 	private volatile Slider slider;
 	
-	public static int count = 0;
-	
 	public MyThread(Slider slider, boolean type){
         this.slider = slider;
         this.type = type;
