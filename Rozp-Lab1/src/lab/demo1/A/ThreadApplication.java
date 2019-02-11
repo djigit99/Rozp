@@ -15,10 +15,6 @@ import javafx.stage.Stage;
 
 public class ThreadApplication extends Application {
 
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
@@ -32,20 +28,11 @@ public class ThreadApplication extends Application {
 		ProgressBar fPriority = new ProgressBar(0.5);
 		ProgressBar sPriority = new ProgressBar(0.5);
 		
-		Thread fThread = new MyThread(slider, false);
-		Thread sThread = new MyThread(slider, true);
+		Thread fThread = new DaemonThread(slider, false);
+		Thread sThread = new DaemonThread(slider, true);
 		
 		fThread.setPriority(5);
 		sThread.setPriority(5);
-		
-		/*
-		 * the easiest is to simply create your Threads as daemons, 
-		 * which means that when your main program 
-		 * ends all daemon threads will terminate too.
-		 */
-		
-		fThread.setDaemon(true);
-		sThread.setDaemon(true);
 		
 		slider.setShowTickLabels(true);
 		slider.setBlockIncrement(1);
@@ -120,6 +107,10 @@ public class ThreadApplication extends Application {
 		Scene scene = new Scene(vBox);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+
+    public static void main(String[] args) {
+		launch();
 	}
 
 }

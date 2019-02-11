@@ -2,14 +2,15 @@ package lab.demo1.A;
 
 import javafx.scene.control.Slider;
 
-public class MyThread extends Thread {
+public class DaemonThread extends Thread {
 
 	private boolean type;
 	private volatile Slider slider;
 	
-	public MyThread(Slider slider, boolean type){
+	public DaemonThread(Slider slider, boolean type){
         this.slider = slider;
         this.type = type;
+        setDaemon(true);
 	}
 	
 	@Override
@@ -19,8 +20,6 @@ public class MyThread extends Thread {
 				if (type == true) { 
 					if (slider.getValue() < 90) {
 						slider.increment();
-						/*if (slider.getValue() == 90)
-							count++;*/
 						try {
 							Thread.sleep(10);
 						} catch (InterruptedException e) {
@@ -32,8 +31,6 @@ public class MyThread extends Thread {
 				else {
 					if (slider.getValue() > 10) {
 						slider.decrement();
-						/*if (slider.getValue() == 10)
-							count--;*/
 						try {
 							Thread.sleep(10);
 						} catch (InterruptedException e) {
