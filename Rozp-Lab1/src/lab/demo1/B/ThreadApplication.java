@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class ThreadApplication extends Application {
 
-	private static int semaphore = 0;
+	private volatile static int semaphore = 0;
 	private Thread fThread;
 	private Thread sThread;
 	
@@ -48,6 +48,7 @@ public class ThreadApplication extends Application {
 					System.out.println("Acquired!");
 					fThread = new DaemonThread(slider, false);
 					fThread.setPriority(Thread.MIN_PRIORITY);
+					fThread.start();
 					fStart.setDisable(true);
 					sStart.setDisable(false);
 					fStop.setDisable(false);
